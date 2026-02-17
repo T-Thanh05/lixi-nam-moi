@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>🧧 Quay Lì Xì Năm Mới</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle, #ff512f, #dd2476);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.box {
+  background: rgba(0,0,0,0.3);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 320px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+#spinBtn {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  background: gold;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#spinBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.spin {
+  animation: rotate 1s linear infinite;
+}
+
+.shake {
+  animation: shake 0.3s infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.loading {
+  margin-top: 20px;
+  font-size: 18px;
+  display: none;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffeb3b;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>🧧 LÌ XÌ NĂM MỚI 🧧</h1>
+  <p>Mỗi người chỉ được quay <b>1 lần</b></p>
+
+  <button id="spinBtn">QUAY</button>
+
+  <div class="loading" id="loading">⏳ Đang mở lì xì...</div>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+const btn = document.getElementById("spinBtn");
+const result = document.getElementById("result");
+const loading = document.getElementById("loading");
+
+// Nếu đã quay rồi
+if (localStorage.getItem("lixi")) {
+  btn.disabled = true;
+  result.innerText = "🎉 Bạn đã nhận: " + localStorage.getItem("lixi") + " VNĐ";
+}
+
+btn.onclick = () => {
+  btn.disabled = true;
+  btn.classList.add("spin", "shake");
+  loading.style.display = "block";
+
+  setTimeout(() => {
+    const moneyList = [1000, 2000, 5000, 10000, 20000, 50000, 100000];
+    const money = moneyList[Math.floor(Math.random() * moneyList.length)];
+
+    localStorage.setItem("lixi", money);
+
+    btn.classList.remove("spin", "shake");
+    loading.style.display = "none";
+    result.innerText = "🎉 Chúc mừng! Bạn nhận: " + money + " VNĐ";
+  }, 2500);
+};
+</script>
+
+</body>
+</html>
