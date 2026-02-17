@@ -110,7 +110,7 @@ btn.onclick = () => {
   loading.style.display = "block";
 
   setTimeout(() => {
-    const moneyList = [1000, 2000, 5000, 10000, 20000, 50000, 100000];
+    const moneyList = [1000, 2000];
     const money = moneyList[Math.floor(Math.random() * moneyList.length)];
 
     localStorage.setItem("lixi", money);
@@ -124,3 +124,4 @@ btn.onclick = () => {
 
 </body>
 </html>
+
